@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { isAdmin, isUser } from '../middlewares/auth.js';
+import { isAdmin, isUser, adminAuthentication } from '../middlewares/auth.js';
 import passport from "passport";
 
 const authHTMLRouter = Router();
@@ -14,7 +14,7 @@ authHTMLRouter.get('/login', (req, res) => {
     }
 });
 
-authHTMLRouter.post('/login', passport.authenticate('login', { failureRedirect: '/auth/faillogin' }), async (req, res) => {
+authHTMLRouter.post('/login', adminAuthentication, passport.authenticate('login', { failureRedirect: '/auth/faillogin' }), async (req, res) => {
     if (!req.user) {
         return res.status(400).render('error', { error: 'Coloque su email y contraseña para iniciar sesión.' });
     }
