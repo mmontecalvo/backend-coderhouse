@@ -9,10 +9,9 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import { initializePassport } from "./config/passport.config.js";
 import passport from "passport";
-import { MONGODB_URL } from "./config.js";
+import { MONGODB_URL, PORT } from "./config.js";
 
 const app = express();
-const PORT = 8080;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

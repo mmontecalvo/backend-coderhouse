@@ -1,4 +1,5 @@
 import { ADMIN_EMAIL, ADMIN_PASSWORD } from "../config.js";
+import passport from "passport";
 
 export function isUser(req, res, next) {
     if (req.session?.user) {
@@ -22,3 +23,11 @@ export function adminAuthentication(req, res, next) {
     }
     return next();
 }
+
+export const passportLogIn = passport.authenticate('login', { failureRedirect: '/auth/faillogin' });
+
+export const passportRegister = passport.authenticate('register', { failureRedirect: '/auth/failregister' });
+
+export const passportGitHubAuth = passport.authenticate('github', { scope: ['user:email'] });
+
+export const passportGitHubCallback = passport.authenticate('github', { failureRedirect: '/auth/login' });
