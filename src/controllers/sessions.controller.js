@@ -1,3 +1,5 @@
+import UserDataSessionDTO from "../DAO/DTO/userDataSession.dto.js";
+
 class SessionsController {
     gitHubCallback(req, res) {
         req.session.user = req.user;
@@ -32,7 +34,8 @@ class SessionsController {
         if (!req.user) {
             return res.status(400).render('error', { error: 'Coloque su email y contraseña para iniciar sesión.' });
         }
-        req.session.user = { _id: req.user._id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, role: req.user.role };
+        const userDataSession = new UserDataSessionDTO(req.user);
+        req.session.user = { ...userDataSession };
         
         return res.redirect('/products');
     }
@@ -52,9 +55,10 @@ class SessionsController {
         if (!req.user) {
             return res.status(400).render('error', { error: 'Los datos ingresados son incompletos. Por favor, complete todos los campos.' });
         }
-            req.session.user = { _id: req.user._id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, age: req.user.age, role: req.user.role };
+        const userDataSession = new UserDataSessionDTO(req.user);
+        req.session.user = { ...userDataSession };
         
-            return res.redirect('/products');
+        return res.redirect('/products');
     }
 
     failRegister(req, res) {
