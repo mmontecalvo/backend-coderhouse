@@ -20,7 +20,7 @@
             <li class="list__item">Precio: {{price}}</li>
             <li class="list__item">Stock: {{stock}}</li>
             <li class="list__item">Categoría: {{category}}</li>
-            <button>Agregar al carrito</button>
+            <button data-cart="{{../finalData.cart}}" data-id="{{id}}" onclick="addToCart(this)">Agregar al carrito</button>
         </ul>
     {{/each}}
     </div>
@@ -34,3 +34,4 @@
         <a href={{finalData.nextLink}} class="pagination__link">{{finalData.nextPage}}</a>
     {{/if}}
 </div>
+<script src="/js/ecommerce.js"></script>
