@@ -7,6 +7,8 @@ class SessionsController {
     }
 
     currentSession(req, res) {
+        const userDataSession = new UserDataSessionDTO(req.user);
+        req.session.user = { ...userDataSession };
         if(req.session.user) {
             return res.status(200).json({
                 status: "success",
@@ -34,8 +36,7 @@ class SessionsController {
         if (!req.user) {
             return res.status(400).render('error', { error: 'Coloque su email y contraseña para iniciar sesión.' });
         }
-        const userDataSession = new UserDataSessionDTO(req.user);
-        req.session.user = { ...userDataSession };
+        req.session.user = { ...req.user };
         
         return res.redirect('/products');
     }

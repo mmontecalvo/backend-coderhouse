@@ -10,7 +10,7 @@ cartsRouter.post("/", cartsController.createNewCart);
 
 cartsRouter.get("/:cid", cartsController.getCartById);
 
-cartsRouter.post("/:cid/products/:pid", isUser,cartsController.addProductToCart);
+cartsRouter.post("/:cid/products/:pid", isUser, cartsController.addProductToCart);
 
 cartsRouter.delete("/:cid/products/:pid", cartsController.deleteProductToCart);
 

@@ -102,6 +102,7 @@ class CartsService {
 
     async finalizePurchase(cid, user) {
         const cart = await this.getCartById(cid);
+        const outOfStock = [];
 
         if(cart) {
             const createTicket = await ticketsService.createTicket(user);
@@ -112,9 +113,12 @@ class CartsService {
                     const amount = product.price * prod.quantity;
                     await ticketsService.updateTicketAmount(createTicket._id, amount);
                     await this.deleteProductToCart(cid, product._id);
+                } else {
+                    outOfStock.push(prod.product.title);
                 }
             }
-            const finalizedPurchase = await ticketsService.getTicketById(createTicket._id);
+            const finalTicket = await ticketsService.getTicketById(createTicket._id);
+            const finalizedPurchase = {...finalTicket._doc, outOfStock: outOfStock}
             return finalizedPurchase;
         } else {
             throw new Error('Cart not exist.');

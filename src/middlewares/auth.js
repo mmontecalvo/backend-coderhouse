@@ -9,7 +9,8 @@ export function isActiveSession(req, res, next) {
 }
 
 export function isUser(req, res, next) {
-    if (req.session?.user.role === "user") {
+    const cartUser = req.params.cid;
+    if (req.session.user.cart === cartUser) {
         return next();
     }
     return res.status(403).render('error', { error: 'Error de autorización!' });
