@@ -37,7 +37,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(
     cors({
       origin: "http://localhost:8080/",
-      methods: ["GET", "POST", "PUT"],
+      methods: ["GET", "POST", "PUT", "DELETE"],
     })
 );
 
@@ -57,7 +57,7 @@ app.use(
       store: MongoStore.create({ mongoUrl: config.mongodbURL, ttl: 7200 }),
       secret: '...',
       resave: true,
-      saveUninitialized: true,
+      saveUninitialized: true
     })
 );
 

@@ -137,9 +137,9 @@ class ProductsService {
             hasNextPage: result.hasNextPage,
             prevLink: prevLinkURL,
             nextLink: nextLinkURL,
-            userName: req.session.user.firstName,
-            isAdmin: req.session.user.isAdmin,
-            cart: req.session.user.cart
+            userName: req.session.user._doc.firstName,
+            isAdmin: (req.session.user._doc.role === "admin") ? true : false,
+            cart: req.session.user._doc.cart
         };
         return finalData;
     }
