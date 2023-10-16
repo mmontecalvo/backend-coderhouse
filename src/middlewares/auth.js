@@ -11,7 +11,7 @@ export function isActiveSession(req, res, next) {
 }
 
 export function isUser(req, res, next) {
-    if (req.session.user._doc.role === "user") {
+    if (req.session.user._doc.role === "user" || req.session.user._doc.role === "premium") {
         return next();
     }
     logger.error('Error de autorización!');

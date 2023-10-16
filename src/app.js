@@ -36,8 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use(
     cors({
-      //origin: [config.webProdURL, `http://localhost:${config.port}`],
-      origin: "*",
+      origin: [config.webProdURL, `http://localhost:${config.port}`],
       methods: ["GET", "POST", "PUT", "DELETE"],
     })
 );
