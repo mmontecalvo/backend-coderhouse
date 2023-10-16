@@ -36,12 +36,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 app.use(
     cors({
-      origin: [config.webProdURL, `http://localhost:${config.port}`],
+      //origin: [config.webProdURL, `http://localhost:${config.port}`],
+      origin: "*",
       methods: ["GET", "POST", "PUT", "DELETE"],
     })
 );
-
-console.log((config.environment === "PRODUCTION") ? config.webProdURL : `http://localhost:${config.port}`)
 
 const httpServer = app.listen(config.port, () => {
     logger.info(`App listening on port http://localhost:${config.port}`);
