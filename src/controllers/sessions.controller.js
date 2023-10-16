@@ -57,7 +57,8 @@ class SessionsController {
             return res.status(400).render('error', { error: 'Los datos ingresados son incompletos. Por favor, complete todos los campos.' });
         }
         const userDataSession = new UserDataSessionDTO(req.user);
-        req.session.user._doc = { ...userDataSession };
+        req.session.user = { _doc: {} }
+        req.session.user._doc = {firstName: userDataSession.firstName, email: userDataSession.email, cart: userDataSession.cart, role: userDataSession.role}
         
         return res.redirect('/products');
     }
