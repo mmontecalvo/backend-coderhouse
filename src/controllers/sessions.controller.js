@@ -68,7 +68,7 @@ class SessionsController {
     }
 
     showProfile(req, res) {
-        const user = { firstName: req.session.user._doc.firstName, email: req.session.user._doc.email, isAdmin: (req.session.user._doc.role === "admin") ? true : false };
+        const user = { firstName: req.session.user._doc.firstName, email: req.session.user._doc.email,  isPremium: (req.session.user._doc.role === "premium") ? true : false ,isAdmin: (req.session.user._doc.role === "admin") ? true : false };
         return res.render('profile', { user: user });
     }
 
